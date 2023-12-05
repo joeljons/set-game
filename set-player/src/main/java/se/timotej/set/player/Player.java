@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 public interface Player {
     /**
-     * Called before start of the game. Corresponds to the scores list in {@link GameState#getScores()}
+     * Called before start of the game. Corresponds to the scores list in {@link GameState#scores()}
      *
      * @param playerNumber your number
      */
@@ -22,7 +22,7 @@ public interface Player {
      * Play as fast as you can!
      *
      * @param state current game state
-     * @return a valid player, or null if you can't find any valid player
+     * @return a valid play, or null if you can't find any valid play
      */
     Triple<Card, Card, Card> play(GameState state);
 }

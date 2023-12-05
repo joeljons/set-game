@@ -45,7 +45,7 @@ public class Game {
             while (!cardsOnTable.isEmpty()) {
                 GameState gameState = new GameState(cardsOnTable, scores);
 
-                Long bestTime = Long.MAX_VALUE;
+                long bestTime = Long.MAX_VALUE;
                 Triple<Card, Card, Card> bestPlay = null;
                 int bestPlayer = -1;
                 List<Integer> playerOrder = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Game {
                 Collections.shuffle(playerOrder);
                 for (Integer playerNum : playerOrder) {
                     Player player = players.get(playerNum);
-                    Long start = System.nanoTime();
+                    long start = System.nanoTime();
                     Triple<Card, Card, Card> play = null;
                     try {
                         play = player.play(gameState);
@@ -63,7 +63,7 @@ public class Game {
                         e.printStackTrace();
                         scores.set(playerNum, Math.max(scores.get(playerNum) - 1, 0));
                     }
-                    Long duration = System.nanoTime() - start;
+                    long duration = System.nanoTime() - start;
                     if (play != null && duration < bestTime) {
                         bestTime = duration;
                         bestPlay = play;
@@ -73,10 +73,10 @@ public class Game {
                 boolean cardsPlayed = false;
                 if (bestPlay != null) {
                     if (!isSet(bestPlay)) {
-                        System.out.println(String.format("Invalid player from player %d: %s", bestPlayer, bestPlay));
+                        System.out.printf("Invalid player from player %d: %s%n", bestPlayer, bestPlay);
                         scores.set(bestPlayer, Math.max(scores.get(bestPlayer) - 1, 0));
                     } else if (!cardsOnTable.contains(bestPlay.getLeft()) || !cardsOnTable.contains(bestPlay.getMiddle()) || !cardsOnTable.contains(bestPlay.getRight())) {
-                        System.out.println(String.format("Played card not on table for player %d: %s", bestPlayer, bestPlay));
+                        System.out.printf("Played card not on table for player %d: %s%n", bestPlayer, bestPlay);
                         scores.set(bestPlayer, Math.max(scores.get(bestPlayer) - 1, 0));
                     } else {
                         //System.out.println("bestTime = " + bestTime);

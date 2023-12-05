@@ -1,13 +1,13 @@
 package se.timotej.set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import se.timotej.set.player.Card;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeckTest {
     @Test

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SamplePlayer implements Player {
-    private Random r = new Random();
+    private final Random r = new Random();
 
     @Override
     public void initGame(int playerNumber) {
@@ -19,7 +19,7 @@ public class SamplePlayer implements Player {
 
     @Override
     public Triple<Card, Card, Card> play(GameState state) {
-        List<Card> cards = state.getCardsOnTable();
+        List<Card> cards = state.cardsOnTable();
         int cardCount = cards.size();
         for (int i = 0; i < 1000000; i++) {
             int a = r.nextInt(cardCount);

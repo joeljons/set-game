@@ -14,10 +14,10 @@ public class SetUtil {
                 || cards.getMiddle().equals(cards.getRight())) {
             return false;
         }
-        return sameOrDifferent(cards, Card::getShape)
-                && sameOrDifferent(cards, Card::getColour)
-                && sameOrDifferent(cards, Card::getNumber)
-                && sameOrDifferent(cards, Card::getShading);
+        return sameOrDifferent(cards, Card::shape)
+                && sameOrDifferent(cards, Card::colour)
+                && sameOrDifferent(cards, Card::number)
+                && sameOrDifferent(cards, Card::shading);
     }
 
     private static boolean sameOrDifferent(Triple<Card, Card, Card> cards, Function<Card, Enum<?>> propertyGetter) {
