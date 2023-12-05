@@ -117,8 +117,8 @@ public class Game {
         }
         System.out.println("wins = " + Arrays.toString(wins));
 
-        for (Player player : players) {
-            System.out.println(player.getName());
+        for (int i = 0; i < players.size(); i++) {
+            System.out.printf("%10d %s%n", wins[i], players.get(i).getName());
         }
     }
 }
