@@ -30,7 +30,7 @@ public class Game {
         }
         int[] wins = new int[args.length];
         long lastPrintout = 0L;
-        for (int matchNr = 0; matchNr < 100_000; matchNr++) {
+        for (int matchNr = 0; matchNr < 10_000_000; matchNr++) {
             List<Integer> scores = new ArrayList<>();
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).initGame(i);
@@ -73,7 +73,7 @@ public class Game {
                 boolean cardsPlayed = false;
                 if (bestPlay != null) {
                     if (!isSet(bestPlay)) {
-                        System.out.printf("Invalid player from player %d: %s%n", bestPlayer, bestPlay);
+                        System.out.printf("Invalid play from player %d: %s%n", bestPlayer, bestPlay);
                         scores.set(bestPlayer, Math.max(scores.get(bestPlayer) - 1, 0));
                     } else if (!cardsOnTable.contains(bestPlay.getLeft()) || !cardsOnTable.contains(bestPlay.getMiddle()) || !cardsOnTable.contains(bestPlay.getRight())) {
                         System.out.printf("Played card not on table for player %d: %s%n", bestPlayer, bestPlay);
@@ -87,7 +87,7 @@ public class Game {
                         cardsPlayed = true;
                     }
                 }
-                if ((bestPlay == null || cardsPlayed) && !deck.isEmpty()) {
+                if ((bestPlay == null || (cardsPlayed && cardsOnTable.size() < 12)) && !deck.isEmpty()) {
                     for (int i = 0; i < 3; i++) {
                         cardsOnTable.add(deck.take());
                     }
