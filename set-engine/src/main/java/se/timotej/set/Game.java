@@ -15,6 +15,8 @@ import static se.timotej.set.player.SetUtil.isSet;
 
 public class Game {
 
+    public static final int GAME_COUNT = 10_000;
+
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         if (args.length == 0) {
             System.out.println("Enter player classes as args");
@@ -29,8 +31,9 @@ public class Game {
             players.add(player);
         }
         int[] wins = new int[args.length];
+        long[] totalTime = new long[args.length];
         long lastPrintout = 0L;
-        for (int matchNr = 0; matchNr < 10_000_000; matchNr++) {
+        for (int matchNr = 0; matchNr < GAME_COUNT; matchNr++) {
             List<Integer> scores = new ArrayList<>();
             for (int i = 0; i < players.size(); i++) {
                 players.get(i).initGame(i);
@@ -64,6 +67,7 @@ public class Game {
                         scores.set(playerNum, Math.max(scores.get(playerNum) - 1, 0));
                     }
                     long duration = System.nanoTime() - start;
+                    totalTime[playerNum] += duration;
                     if (play != null && duration < bestTime) {
                         bestTime = duration;
                         bestPlay = play;
@@ -118,7 +122,7 @@ public class Game {
         System.out.println("wins = " + Arrays.toString(wins));
 
         for (int i = 0; i < players.size(); i++) {
-            System.out.printf("%10d %s%n", wins[i], players.get(i).getName());
+            System.out.printf("%10d %-15s %d ns%n", wins[i], players.get(i).getName(), totalTime[i] / GAME_COUNT);
         }
     }
 }
